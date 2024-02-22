@@ -1,5 +1,4 @@
-{% load static %} {% url 'home' as home_url %}
-
+{% load static %} {% url 'home' as home_url %} {% url 'about' as about_url %}
 <!DOCTYPE html>
 <html class="h-100" lang="en">
   <head>
@@ -68,6 +67,33 @@
               >
             </li>
           </ul>
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a
+              class="nav-link {% if request.path == 'account_logout' %}active{% endif %}"
+              aria-current="page"
+              href="{% url 'account_logout' %}"
+              >Logout</a
+            >
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a
+              class="nav-link {% if request.path == 'account_signup' %}active{% endif %}"
+              aria-current="page"
+              href="{% url 'account_signup' %}"
+              >Register</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link {% if request.path == 'account_login' %}active{% endif %}"
+              aria-current="page"
+              href="{% url 'account_login' %}"
+              >Login</a
+            >
+          </li>
+          {% endif %}
           <span class="navbar-text text-muted">
             adventures of a software developer
           </span>
